@@ -1,36 +1,40 @@
-import React from 'react';
-import {Countryname} from './components/Countryname'
-import {News} from './components/News'
-import './components/Countryname.css';
+import React from "react";
+import { Countryname } from "./components/Countryname";
+import "./components/Countryname.css";
 
-class App extends React.Component{
-  constructor(props){
+class App extends React.Component {
+  constructor(props) {
     super(props);
-    this.state={
-     time: new Date().toLocaleTimeString(),
-     date: new Date().toLocaleDateString()
-    }
+    this.state = {
+      time: new Date().toLocaleTimeString(),
+      date: new Date().toLocaleDateString(),
+    };
   }
-  watch=()=>{
+  watch = () => {
     this.setState({
-      time: new Date().toLocaleTimeString()
-    })
+      time: new Date().toLocaleTimeString(),
+    });
+  };
+  componentDidMount() {
+    setInterval(this.watch, 1000);
   }
-  componentDidMount(){
-      setInterval(this.watch,1000)
+
+  render() {
+    return (
+      <div className="body">
+        <h4 className="time">
+          {this.state.date}
+          <span>, </span>
+          {this.state.time}
+        </h4>
+
+        <h1 className="pageHeader">Daily News</h1>
+        <h4>Select the Nation for the Daily Breaking News</h4>
+
+        <Countryname />
+        {/* <News /> */}
+      </div>
+    );
   }
-  
-render(){
-  return(
-    <div className="body"><h3 className="time">
-       {this.state.date}<span>, </span>{this.state.time}</h3>
-      <center>
-        <h1 className="port">NEWSPORTAL</h1>
-        <h4>Select the Nation for the Daily Breaking News</h4></center>
-        <Countryname/>
-        <News />
-    </div>
-  )
-}
 }
 export default App;
